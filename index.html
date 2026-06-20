@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예산 맞춤형 쇼핑 도우미 💖</title>
+    <!-- Google Fonts: Fredoka for Y2K rounded aesthetic, Noto Sans KR for neat readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* style.css - 2000s Y2K / Retro High-Teen Style Sheet */
+        /* Root Variables for Color Customizations */
+        :root {
+            --bg-base: #FFF0F5; /* Soft pastel pink */
+            --card-bg: #FFFFFF;
+            --text-color: #333333;
+            --text-muted: #666666;
+            
+            /* Y2K Brand Colors */
+            --bubblegum-pink: #FF69B4;
+            --bubblegum-pink-deep: #FF1493;
+            --sky-blue: #87CEEB;
+            --sky-blue-deep: #00BFFF;
+            --pastel-blue-bg: #E0F2FE;
+            --pastel-pink-bg: #FFE4E1;
+            --pastel-yellow: #FFFACD;
+            --pastel-yellow-border: #F0E68C;
+            --success-green: #2ECC71;
+            --danger-red: #E74C3C;
+            
+            /* Font Families */
+            --font-bubbly: 'Fredoka', 'Noto Sans KR', sans-serif;
+            --font-ui: 'Noto Sans KR', sans-serif;
+        }
+        /* Base resets and body styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: var(--bg-base);
+            /* Cute Y2K style polka-dot background */
+            background-image: radial-gradient(rgba(255, 105, 180, 0.15) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            font-family: var(--font-ui);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Scrollbars - Cute retro pink/blue style */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF;
+            border-left: 2px solid #333;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bubblegum-pink);
+            border: 2px solid #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bubblegum-pink-deep);
+        }
+        /* Floating Sparkle Elements */
+        .decor-sparkle {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+            animation: float 6s ease-in-out infinite alternate;
+        }
+        .sparkle-1 { top: 5%; left: 8%; animation-delay: 0s; }
+        .sparkle-2 { top: 12%; right: 10%; animation-delay: 1.5s; }
+        .sparkle-3 { bottom: 15%; left: 5%; animation-delay: 3s; }
+        .sparkle-4 { bottom: 8%; right: 7%; animation-delay: 4.5s; }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            100% { transform: translateY(-15px) rotate(15deg) scale(1.1); }
+        }
+        /* Main Container Layout */
+        .app-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+        /* Header design */
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo-text {
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            font-size: 3rem;
+            color: var(--text-color);
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 0px var(--sky-blue);
+            display: inline-block;
+            background: #FFF;
+            padding: 10px 24px;
+            border: 2px solid #333;
+            border-radius: 50px;
+            box-shadow: 4px 4px 0px #333;
+            transform: rotate(-1.5deg);
+            margin-bottom: 12px;
+        }
+        .highlight-pink {
+            color: var(--bubblegum-pink);
+            text-shadow: 3px 3px 0px var(--pastel-yellow);
+        }
+        .subtitle-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background-color: var(--pastel-yellow);
+            display: inline-block;
+            padding: 6px 16px;
+            border: 1.5px solid #333;
+            border-radius: 30px;
+            transform: rotate(1deg);
+            box-shadow: 2px 2px 0px #333;
+        }
+        /* Main content grids */
+        .app-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        @media (max-width: 850px) {
+            .app-main {
+                grid-template-columns: 1fr;
+            }
+        }
+        .column-left, .column-right {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        /* Cute Sticker Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 2px solid #333;
+            border-radius: 20px;
+            box-shadow: 6px 6px 0px #333;
+            padding: 28px 24px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        /* Step/Category badging */
+        .card-badge {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: #333;
+            box-shadow: 2px 2px 0px #333;
+        }
+        .badge-blue { background-color: var(--sky-blue); }
+        .badge-pink { background-color: var(--bubblegum-pink); }
+        .card-title {
+            font-family: var(--font-bubbly);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        /* Form elements & Inputs */
+        .budget-input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .input-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        input[type="text"] {
+            width: 100%;
+            font-family: var(--font-bubbly);
+            font-size: 1.1rem;
+            padding: 12px 35px 12px 14px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #FFF;
+            outline: none;
+            box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: var(--bubblegum-pink);
+            background-color: #FFFDFE;
+        }
+        .currency-label {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 700;
+            color: #555;
+        }
+        /* Custom interactive sticker buttons */
+        .btn {
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 20px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #333;
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        .btn-primary {
+            background-color: var(--sky-blue);
+            color: #333;
+        }
+        .btn-primary:hover {
+            background-color: var(--sky-blue-deep);
+        }
+        .btn-secondary {
+            background-color: var(--bubblegum-pink);
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background-color: var(--bubblegum-pink-deep);
+        }
+        .btn-accent {
+            background-color: var(--pastel-yellow);
+            color: #333;
+        }
+        .btn-accent:hover {
+            background: #FFF88D;
+        }
+        .btn-large {
+            font-size: 1.2rem;
+            padding: 16px 28px;
+            border-radius: 16px;
+            width: 100%;
+        }
+        /* Button animation: Bubbly sticker push */
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #333;
+        }
+        .btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px #333;
+        }
+        /* Active Tape Badge for Budget Display */
+        .active-budget-tape {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--pastel-yellow);
+            border: 2px dashed #333;
+            padding: 10px 18px;
+            margin-top: 10px;
+            border-radius: 4px;
+            transform: rotate(-1deg);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            font-weight: 700;
+        }
+        .tape-text {
+            font-size: 1.05rem;
+            color: #333;
+        }
+        .btn-text-delete {
+            background: none;
+            border: none;
+            color: var(--bubblegum-pink-deep);
+            font-weight: 700;
+            margin-left: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
+        .btn-text-delete:hover {
+            color: red;
+        }
+        /* Step 2 Inputs */
+        .item-input-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 12px;
+        }
+        .input-field-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .input-field-wrapper label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-color);
+            padding-left: 4px;
+        }
+        /* Cart Counter & Warnings */
+        .cart-counter {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background-color: #FAF5FF;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px dashed #DDD;
+        }
+        .limit-warn-text {
+            color: var(--danger-red);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        /* Notebook Ring Decoration for diary style */
+        .list-card {
+            padding-top: 40px;
+        }
+        .notebook-rings {
+            position: absolute;
+            top: 12px;
+            left: 40px;
+            right: 40px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .notebook-rings .ring {
+            width: 14px;
+            height: 24px;
+            background: linear-gradient(90deg, #CCCCCC, #EEEEEE, #999999);
+            border: 1.5px solid #333;
+            border-radius: 7px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+        }
+        .list-card-title {
+            font-family: var(--font-bubbly);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        /* Table Style styled like Lined Notepad */
+        .table-container {
+            max-height: 320px;
+            overflow-y: auto;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #FFF;
+            margin-bottom: 20px;
+        }
+        .diary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .diary-table th {
+            background-color: var(--pastel-blue-bg);
+            color: #333;
+            font-weight: 700;
+            padding: 12px 8px;
+            border-bottom: 2px solid #333;
+            font-family: var(--font-bubbly);
+        }
+        .diary-table td {
+            padding: 14px 8px;
+            border-bottom: 1px solid #EAEAEA;
+            background-color: #FFFFFF;
+        }
+        /* Alternating rows pattern like diary rules */
+        .diary-table tbody tr:nth-child(even) td {
+            background-color: #FDFBFF;
+        }
+        .diary-table tbody tr:hover td {
+            background-color: #FFF0F5;
+        }
+        .empty-row td {
+            padding: 40px 10px;
+            color: #999;
+            font-style: italic;
+            background-color: #FAFAFA !important;
+        }
+        /* Delete Button in Cart */
+        .btn-delete-item {
+            background-color: #FFF;
+            border: 1.5px solid #333;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px #333;
+            transition: all 0.1s;
+        }
+        .btn-delete-item:hover {
+            background-color: var(--danger-red);
+            color: white;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px #333;
+        }
+        .btn-delete-item:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px #333;
+        }
+        /* Cart total bar */
+        .cart-total-bar {
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 14px 18px;
+            background-color: var(--pastel-pink-bg);
+            border: 2px solid #333;
+            border-radius: 12px;
+            box-shadow: 3px 3px 0px #333;
+            margin-bottom: 20px;
+            font-family: var(--font-bubbly);
+        }
+        .cart-total-bar strong {
+            color: var(--bubblegum-pink-deep);
+        }
+        /* Step 3 Calculate Action */
+        .action-container {
+            text-align: center;
+        }
+        /* Recommended Combinations Section */
+        .results-section {
+            margin-top: 50px;
+            background-color: #FFF;
+            border: 2.5px solid #333;
+            border-radius: 24px;
+            box-shadow: 8px 8px 0px #333;
+            padding: 30px;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .results-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .sticker-tag {
+            display: inline-block;
+            background-color: #FFF88D;
+            color: #333;
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border: 1.5px solid #333;
+            border-radius: 4px;
+            transform: rotate(-2deg);
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+        }
+        .results-header h2 {
+            font-family: var(--font-bubbly);
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 6px;
+        }
+        .results-header p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        /* Candidates Grid */
+        .candidates-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        /* Individual Candidate Card */
+        .candidate-card {
+            background-color: #FFF;
+            border: 2px solid #333;
+            border-radius: 16px;
+            box-shadow: 4px 4px 0px #333;
+            padding: 20px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .candidate-card:hover {
+            transform: scale(1.03) translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #333;
+            background-color: #FCF9FF;
+        }
+        /* Card ranks styled as badges */
+        .candidate-rank {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border: 1.5px solid #333;
+            border-radius: 10px;
+            box-shadow: 1.5px 1.5px 0px #333;
+        }
+        .rank-1 { background-color: var(--bubblegum-pink); }
+        .rank-2 { background-color: var(--sky-blue); }
+        .rank-3 { background-color: var(--pastel-yellow); }
+        .rank-4 { background-color: #D8BFD8; } /* Thistle */
+        .rank-5 { background-color: #E6E6FA; } /* Lavender */
+        .candidate-info {
+            margin-bottom: 14px;
+        }
+        .candidate-title {
+            font-family: var(--font-bubbly);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        /* Lined list inside candidate card */
+        .candidate-items-list {
+            background: repeating-linear-gradient(#FFF, #FFF 21px, #EAEAEA 22px);
+            padding: 4px 10px;
+            border-left: 2px solid var(--bubblegum-pink);
+            font-size: 0.9rem;
+            line-height: 22px;
+            margin-bottom: 12px;
+            max-height: 110px;
+            overflow-y: auto;
+            color: #444;
+        }
+        .candidate-item-row {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Candidate Pricing Box */
+        .candidate-prices {
+            background-color: var(--pastel-blue-bg);
+            border: 1.5px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .candidate-prices div {
+            display: flex;
+            justify-content: space-between;
+        }
+        .price-total {
+            font-weight: 700;
+        }
+        .price-remaining {
+            font-weight: 700;
+            color: var(--bubblegum-pink-deep);
+        }
+        /* Utility visibility helper */
+        .hide {
+            display: none !important;
+        }
+        /* Modal Styling - Jagged Receipt */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .receipt-paper {
+            background-color: #FFFFFF;
+            border: 2.5px solid #333;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 380px;
+            padding: 24px;
+            position: relative;
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        /* Receipt Jagged Edges (Top & Bottom) using linear-gradient repeating backgrounds */
+        .receipt-paper::before,
+        .receipt-paper::after {
+            content: '';
+            position: absolute;
+            left: -2.5px;
+            right: -2.5px;
+            height: 12px;
+            background-size: 16px 12px;
+            background-repeat: repeat-x;
+        }
+        .receipt-paper::before {
+            top: -12px;
+            background-image: linear-gradient(135deg, transparent 50%, #FFF 50%), 
+                              linear-gradient(225deg, transparent 50%, #FFF 50%);
+            background-position: bottom left;
+            filter: drop-shadow(0px -2.5px 0px #333);
+        }
+        .receipt-paper::after {
+            bottom: -12px;
+            background-image: linear-gradient(45deg, transparent 50%, #FFF 50%), 
+                              linear-gradient(-45deg, transparent 50%, #FFF 50%);
+            background-position: top left;
+            filter: drop-shadow(0px 2.5px 0px #333);
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .receipt-header {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .receipt-sparkle {
+            font-family: var(--font-bubbly);
+            font-weight: 700;
+            color: var(--bubblegum-pink-deep);
+            margin-bottom: 5px;
+        }
+        .receipt-title {
+            font-family: var(--font-bubbly);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .receipt-subtitle {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 2px;
+        }
+        .receipt-divider {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #555;
+            margin: 8px 0;
+            text-align: center;
+            user-select: none;
+        }
+        .receipt-body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #333;
+        }
+        .receipt-meta {
+            display: flex;
+            justify-content: space-between;
+        }
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+        }
+        .receipt-table th {
+            font-size: 0.8rem;
+            border-bottom: 1.5px dashed #333;
+            padding-bottom: 6px;
+        }
+        .receipt-table td {
+            padding: 6px 0;
+        }
+        .receipt-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 12px 0;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .text-accent {
+            color: var(--bubblegum-pink-deep);
+        }
+        .receipt-footer {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+        .success-slogan {
+            font-family: var(--font-ui);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #333;
+            background-color: var(--pastel-yellow);
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1.5px solid #333;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .receipt-bar-code {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #111;
+            margin-top: 8px;
+            user-select: none;
+        }
+        .btn-full-width {
+            width: 100%;
+            margin-top: 15px;
+        }
+        /* Custom modal active state overrides */
+        .btn-close-receipt {
+            background-color: var(--bubblegum-pink);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background sparkles or retro decoration -->
+    <div class="decor-sparkle sparkle-1">✨</div>
+    <div class="decor-sparkle sparkle-2">🌈</div>
+    <div class="decor-sparkle sparkle-3">💖</div>
+    <div class="decor-sparkle sparkle-4">⭐</div>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <h1 class="logo-text">
+                <span class="highlight-pink">My Shopping</span> Helper 🌟
+            </h1>
+            <p class="subtitle-text">예산에 딱 맞춘 똑똑하고 합리적인 소비 도우미 다이어리 📝</p>
+        </header>
+        <main class="app-main">
+            <!-- Left Side: Inputs & Setup -->
+            <div class="column-left">
+                <!-- Step 1: Budget Card -->
+                <section class="card step-card" id="step-budget">
+                    <div class="card-badge badge-blue">STEP 01</div>
+                    <h2 class="card-title">오늘 사용하실 총 예산은? 💸</h2>
+                    <p class="card-desc">오늘 쇼핑에 소비할 총 예산을 입력해 주세요.</p>
+                    
+                    <div class="budget-input-group">
+                        <div class="input-wrapper">
+                            <input type="text" id="budget-input" placeholder="예: 50,000" autocomplete="off">
+                            <span class="currency-label">원</span>
+                        </div>
+                        <button type="button" id="btn-set-budget" class="btn btn-primary">설정하기</button>
+                    </div>
+                    
+                    <!-- Display set budget -->
+                    <div id="active-budget-display" class="active-budget-tape hide">
+                        <span class="tape-text">📌 설정된 예산: <span id="display-budget-val">0</span>원</span>
+                        <button type="button" id="btn-reset-budget" class="btn-text-delete" title="예산 수정">수정</button>
+                    </div>
+                </section>
+                <!-- Step 2: Add Items Card -->
+                <section class="card step-card" id="step-items">
+                    <div class="card-badge badge-pink">STEP 02</div>
+                    <h2 class="card-title">장바구니 물건 담기 🛍️</h2>
+                    <p class="card-desc">구매를 고민 중인 상품명과 가격을 입력하고 장바구니에 넣어주세요.</p>
+                    
+                    <form id="item-form" class="item-input-form">
+                        <div class="input-row">
+                            <div class="input-field-wrapper">
+                                <label for="item-name">상품 이름</label>
+                                <input type="text" id="item-name" placeholder="예: 곰인형" required autocomplete="off">
+                            </div>
+                            <div class="input-field-wrapper">
+                                <label for="item-price">가격 (원)</label>
+                                <input type="text" id="item-price" placeholder="예: 15,000" required autocomplete="off">
+                            </div>
+                        </div>
+                        <button type="submit" id="btn-add-item" class="btn btn-secondary">장바구니 담기 ＋</button>
+                    </form>
+                    
+                    <div class="cart-counter">
+                        <span>현재 담은 개수: <strong id="current-count">0</strong> / 18개 max</span>
+                        <div class="limit-warn-text hide" id="limit-warn">⚠️ 원활한 계산을 위해 최대 18개까지만 입력 가능합니다!</div>
+                    </div>
+                </section>
+            </div>
+            <!-- Right Side: Cart Table & Results -->
+            <div class="column-right">
+                <!-- Shopping Cart List -->
+                <section class="card list-card" id="cart-list-card">
+                    <div class="notebook-rings">
+                        <span class="ring"></span>
+                        <span class="ring"></span>
+                        <span class="ring"></span>
+                        <span class="ring"></span>
+                    </div>
+                    <h2 class="list-card-title">나의 장바구니 리스트 📋</h2>
+                    
+                    <div class="table-container">
+                        <table class="diary-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%">번호</th>
+                                    <th style="width: 45%">상품명</th>
+                                    <th style="width: 25%">가격</th>
+                                    <th style="width: 15%">삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-table-body">
+                                <!-- Dynamic Rows Go Here -->
+                                <tr class="empty-row">
+                                    <td colspan="4">장바구니가 텅 비어 있어요. 상품을 추가해 보세요! 🛒</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="cart-total-bar">
+                        <span>장바구니 총합: <strong id="cart-total-sum">0</strong>원</span>
+                    </div>
+                    <!-- Step 3: Calculate Button -->
+                    <div class="action-container">
+                        <button type="button" id="btn-calculate" class="btn btn-accent btn-large">
+                            ✨ 최적의 구매 조합 계산하기 ✨
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <!-- Results Section (Generated Dynamic Candidates) -->
+        <section class="results-section hide" id="results-section">
+            <div class="results-header">
+                <span class="sticker-tag">💡 RECOMMENDATIONS</span>
+                <h2>내 예산에 맞춘 베스트 쇼핑 조합 5 💖</h2>
+                <p>예산을 초과하지 않으면서 남는 돈이 가장 적은 조합 후보입니다. 원하는 후보를 선택해 보세요!</p>
+            </div>
+            
+            <div class="candidates-container" id="candidates-container">
+                <!-- Dynamically generated candidate cards -->
+            </div>
+        </section>
+    </div>
+    <!-- Step 4: Receipt Modal Container -->
+    <div class="modal-overlay hide" id="receipt-modal">
+        <div class="receipt-paper">
+            <div class="receipt-header">
+                <div class="receipt-sparkle">💖 THANK YOU 💖</div>
+                <h2 class="receipt-title">MEMBER RECEIPT</h2>
+                <p class="receipt-subtitle">예산 맞춤형 쇼핑 도우미</p>
+                <div class="receipt-divider">=============================</div>
+            </div>
+            
+            <div class="receipt-body">
+                <div class="receipt-meta">
+                    <div>DATE: <span id="receipt-date">2026.06.21</span></div>
+                    <div>STATUS: HAPPY SHOPPING ✨</div>
+                </div>
+                <div class="receipt-divider">-----------------------------</div>
+                
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th align="left">ITEM</th>
+                            <th align="right">PRICE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipt-items-body">
+                        <!-- Dynamic items -->
+                    </tbody>
+                </table>
+                
+                <div class="receipt-divider">-----------------------------</div>
+                
+                <div class="receipt-summary">
+                    <div class="summary-row">
+                        <span>TOTAL BUDGET (예산)</span>
+                        <span id="receipt-budget">0원</span>
+                    </div>
+                    <div class="summary-row font-bold">
+                        <span>TOTAL SUM (구매 합계)</span>
+                        <span id="receipt-total">0원</span>
+                    </div>
+                    <div class="summary-row font-bold text-accent">
+                        <span>CHANGE (남은 돈)</span>
+                        <span id="receipt-change">0원</span>
+                    </div>
+                </div>
+                
+                <div class="receipt-divider">=============================</div>
+                
+                <div class="receipt-footer">
+                    <p class="success-slogan">🛍️ 합리적인 소비를 도와드렸습니다! 🛍️</p>
+                    <p class="receipt-bar-code">|||| | ||| || |||| ||| ||</p>
+                </div>
+            </div>
+            
+            <button type="button" id="btn-close-receipt" class="btn btn-primary btn-full-width">
+                다시 쇼핑하러 가기 🔄
+            </button>
+        </div>
+    </div>
+    <script>
+        // app.js - Budget-customized Shopping Helper Core Logic
+        // 1. App State
+        let budget = null;
+        let items = [];
+        let idCounter = 0;
+        let topCandidates = [];
+        // 2. DOM Elements
+        const budgetInput = document.getElementById('budget-input');
+        const btnSetBudget = document.getElementById('btn-set-budget');
+        const activeBudgetDisplay = document.getElementById('active-budget-display');
+        const displayBudgetVal = document.getElementById('display-budget-val');
+        const btnResetBudget = document.getElementById('btn-reset-budget');
+        const itemForm = document.getElementById('item-form');
+        const itemNameInput = document.getElementById('item-name');
+        const itemPriceInput = document.getElementById('item-price');
+        const currentCountSpan = document.getElementById('current-count');
+        const limitWarn = document.getElementById('limit-warn');
+        const cartTableBody = document.getElementById('cart-table-body');
+        const cartTotalSumSpan = document.getElementById('cart-total-sum');
+        const btnCalculate = document.getElementById('btn-calculate');
+        const resultsSection = document.getElementById('results-section');
+        const candidatesContainer = document.getElementById('candidates-container');
+        const receiptModal = document.getElementById('receipt-modal');
+        const receiptItemsBody = document.getElementById('receipt-items-body');
+        const receiptBudgetSpan = document.getElementById('receipt-budget');
+        const receiptTotalSpan = document.getElementById('receipt-total');
+        const receiptChangeSpan = document.getElementById('receipt-change');
+        const receiptDateSpan = document.getElementById('receipt-date');
+        const btnCloseReceipt = document.getElementById('btn-close-receipt');
+        // 3. Helper: Clean number string and parse to number
+        function cleanNumber(str) {
+            return parseInt(str.replace(/[^\d]/g, ''), 10);
+        }
+        // 4. Helper: Format number with Korean Won commas
+        function formatKRW(number) {
+            return number.toLocaleString('ko-KR');
+        }
+        // 5. Input Formatting Listeners (Prettify numbers as user types)
+        function handleNumberInputFormatting(e) {
+            const rawVal = e.target.value;
+            const cleanVal = rawVal.replace(/[^\d]/g, '');
+            if (!cleanVal) {
+                e.target.value = '';
+                return;
+            }
+            e.target.value = formatKRW(parseInt(cleanVal, 10));
+        }
+        budgetInput.addEventListener('input', handleNumberInputFormatting);
+        itemPriceInput.addEventListener('input', handleNumberInputFormatting);
+        // 6. Set Budget Handler
+        btnSetBudget.addEventListener('click', () => {
+            const rawVal = budgetInput.value.trim();
+            if (!rawVal) {
+                alert('예산을 입력해 주세요! 💕');
+                budgetInput.focus();
+                return;
+            }
+            const parsedBudget = cleanNumber(rawVal);
+            if (isNaN(parsedBudget) || parsedBudget <= 0) {
+                alert('올바른 예산 금액을 입력해 주세요! 0원보다 큰 숫자여야 합니다. ⭐');
+                budgetInput.value = '';
+                budgetInput.focus();
+                return;
+            }
+            budget = parsedBudget;
+            displayBudgetVal.textContent = formatKRW(budget);
+            
+            // Toggle UI display
+            activeBudgetDisplay.classList.remove('hide');
+            budgetInput.disabled = true;
+            btnSetBudget.disabled = true;
+            
+            // Smooth scroll to next section
+            document.getElementById('step-items').scrollIntoView({ behavior: 'smooth' });
+        });
+        // Edit Budget Handler
+        btnResetBudget.addEventListener('click', () => {
+            budget = null;
+            budgetInput.disabled = false;
+            btnSetBudget.disabled = false;
+            budgetInput.value = '';
+            activeBudgetDisplay.classList.add('hide');
+            budgetInput.focus();
+        });
+        // 7. Shopping Cart Management
+        itemForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = itemNameInput.value.trim();
+            const rawPrice = itemPriceInput.value.trim();
+            if (!name || !rawPrice) return;
+            const price = cleanNumber(rawPrice);
+            // Validation
+            if (isNaN(price) || price <= 0) {
+                alert('올바른 상품 가격을 입력해 주세요! (0원 초과) 🛍️');
+                itemPriceInput.value = '';
+                itemPriceInput.focus();
+                return;
+            }
+            if (items.length >= 18) {
+                alert('원활한 계산을 위해 장바구니에는 최대 18개까지만 담을 수 있어요! 🎀');
+                return;
+            }
+            // Add item
+            idCounter++;
+            items.push({ id: idCounter, name, price });
+            // Render & Reset Form
+            renderCart();
+            itemNameInput.value = '';
+            itemPriceInput.value = '';
+            itemNameInput.focus();
+        });
+        // Delete Item
+        function deleteItem(id) {
+            items = items.filter(item => item.id !== id);
+            renderCart();
+        }
+        // Render Cart UI
+        function renderCart() {
+            // Clear list
+            cartTableBody.innerHTML = '';
+            if (items.length === 0) {
+                cartTableBody.innerHTML = `
+                    <tr class="empty-row">
+                        <td colspan="4">장바구니가 텅 비어 있어요. 상품을 추가해 보세요! 🛒</td>
+                    </tr>
+                `;
+                cartTotalSumSpan.textContent = '0';
+                currentCountSpan.textContent = '0';
+                limitWarn.classList.add('hide');
+                return;
+            }
+            // Populate rows
+            items.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><strong>${escapeHtml(item.name)}</strong></td>
+                    <td>${formatKRW(item.price)}원</td>
+                    <td>
+                        <button type="button" class="btn-delete-item" onclick="deleteItem(${item.id})" title="삭제">✕</button>
+                    </td>
+                `;
+                cartTableBody.appendChild(row);
+            });
+            // Calc total
+            const totalSum = items.reduce((sum, item) => sum + item.price, 0);
+            cartTotalSumSpan.textContent = formatKRW(totalSum);
+            currentCountSpan.textContent = items.length;
+            // Warning near limit
+            if (items.length >= 15) {
+                limitWarn.classList.remove('hide');
+                limitWarn.textContent = `⚠️ 주의: 현재 담은 개수 ${items.length}/18개. 18개까지만 담을 수 있습니다!`;
+            } else {
+                limitWarn.classList.add('hide');
+            }
+        }
+        // HTML Escaping Helper
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+        // 8. Combination Search Algorithm (Subset Sum)
+        btnCalculate.addEventListener('click', () => {
+            if (budget === null) {
+                alert('먼저 예산을 설정해 주세요! (STEP 01) 💸');
+                document.getElementById('step-budget').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            if (items.length === 0) {
+                alert('장바구니에 하나 이상의 상품을 담아 주세요! (STEP 02) 🛒');
+                document.getElementById('step-items').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            // Generate Subsets
+            const combos = calculateSubsets(items, budget);
+            if (combos.length === 0) {
+                alert('앗! 예산 범위 안에서 구매할 수 있는 조합이 없습니다. 예산을 늘리거나 다른 저렴한 물건을 추가해 보세요! 😭');
+                resultsSection.classList.add('hide');
+                return;
+            }
+            // Sort combinations:
+            // 1st Priority: Lowest remaining budget (rem closest to 0)
+            // 2nd Priority: More items (better value)
+            combos.sort((a, b) => {
+                if (a.remaining !== b.remaining) {
+                    return a.remaining - b.remaining;
+                }
+                return b.items.length - a.items.length;
+            });
+            // Take top 5
+            topCandidates = combos.slice(0, 5);
+            // Render results
+            renderCandidates(topCandidates);
+        });
+        // Subset calculations with Early Pruning
+        function calculateSubsets(itemsList, maxBudget) {
+            const allCombos = [];
+            const n = itemsList.length;
+            function backtrack(index, currentCombo, currentSum) {
+                // Early Pruning: if current sum exceeds budget, stop exploring this branch
+                if (currentSum > maxBudget) {
+                    return;
+                }
+                // Base case: processed all items
+                if (index === n) {
+                    if (currentCombo.length > 0) {
+                        allCombos.push({
+                            items: [...currentCombo],
+                            total: currentSum,
+                            remaining: maxBudget - currentSum
+                        });
+                    }
+                    return;
+                }
+                // Branch 1: Include itemsList[index]
+                currentCombo.push(itemsList[index]);
+                backtrack(index + 1, currentCombo, currentSum + itemsList[index].price);
+                currentCombo.pop(); // backtracking backtrack
+                // Branch 2: Exclude itemsList[index]
+                backtrack(index + 1, currentCombo, currentSum);
+            }
+            backtrack(0, [], 0);
+            return allCombos;
+        }
+        // Render Recommendations
+        function renderCandidates(candidates) {
+            candidatesContainer.innerHTML = '';
+            resultsSection.classList.remove('hide');
+            candidates.forEach((cand, idx) => {
+                const card = document.createElement('div');
+                card.className = `candidate-card`;
+                
+                // Attach click to confirm selection
+                card.addEventListener('click', () => selectCandidate(idx));
+                const itemRows = cand.items.map(item => `
+                    <div class="candidate-item-row">🎀 ${escapeHtml(item.name)} (${formatKRW(item.price)}원)</div>
+                `).join('');
+                card.innerHTML = `
+                    <span class="candidate-rank rank-${idx + 1}">${idx + 1}순위 후보</span>
+                    <div class="candidate-info">
+                        <h3 class="candidate-title">💡 후보 조합 #${idx + 1}</h3>
+                        <div class="candidate-items-list">
+                            ${itemRows}
+                        </div>
+                    </div>
+                    <div class="candidate-prices">
+                        <div class="price-total">
+                            <span>구매 합계:</span>
+                            <span>${formatKRW(cand.total)}원</span>
+                        </div>
+                        <div class="price-remaining">
+                            <span>남는 돈:</span>
+                            <span>${formatKRW(cand.remaining)}원</span>
+                        </div>
+                    </div>
+                `;
+                
+                candidatesContainer.appendChild(card);
+            });
+            // Smooth scroll to recommendations
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        // 9. Receipt / Confirmation Popup
+        function selectCandidate(index) {
+            const selected = topCandidates[index];
+            if (!selected) return;
+            // Fill Date
+            const today = new Date();
+            const formattedDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+            receiptDateSpan.textContent = formattedDate;
+            // Render receipt items
+            receiptItemsBody.innerHTML = '';
+            selected.items.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td align="left">${escapeHtml(item.name)}</td>
+                    <td align="right">${formatKRW(item.price)}원</td>
+                `;
+                receiptItemsBody.appendChild(tr);
+            });
+            // Render Summary
+            receiptBudgetSpan.textContent = `${formatKRW(budget)}원`;
+            receiptTotalSpan.textContent = `${formatKRW(selected.total)}원`;
+            receiptChangeSpan.textContent = `${formatKRW(selected.remaining)}원`;
+            // Show Modal
+            receiptModal.classList.remove('hide');
+        }
+        // Close receipt / reset app
+        btnCloseReceipt.addEventListener('click', () => {
+            receiptModal.classList.add('hide');
+            resetApplication();
+        });
+        // Restart & Reset State
+        function resetApplication() {
+            budget = null;
+            items = [];
+            idCounter = 0;
+            topCandidates = [];
+            // Reset UI Inputs
+            budgetInput.value = '';
+            budgetInput.disabled = false;
+            btnSetBudget.disabled = false;
+            activeBudgetDisplay.classList.add('hide');
+            itemNameInput.value = '';
+            itemPriceInput.value = '';
+            // Clear Cart table
+            renderCart();
+            // Hide results section
+            resultsSection.classList.add('hide');
+            candidatesContainer.innerHTML = '';
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
